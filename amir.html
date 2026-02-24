@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Relino</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #e6d2bf;
+            --primary: #c19172;
+            --button: #d3a98c;
+            --button-active: #b7866a;
+            --glass: rgba(255, 255, 255, .35);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: "Vazirmatn", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone {
+
+            width: 390px;
+            min-height: 100vh;
+            background: var(--bg);
+
+        }
+
+
+        /* HEADER */
+
+        .header {
+
+            height: 200px;
+            background: var(--primary);
+
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 40px;
+            color: #1b8a89;
+            font-weight: 700;
+
+            position: relative;
+
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .1);
+
+        }
+
+
+        /* DATE CARD */
+
+        .date-card {
+
+            width: 170px;
+            height: 170px;
+
+            margin: -70px auto 20px;
+
+            background: linear-gradient(145deg, #d8cbb7, #cbbda8);
+
+            border-radius: 30px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            box-shadow:
+
+                inset 0 2px 3px rgba(255, 255, 255, .8),
+
+                0 10px 20px rgba(0, 0, 0, .1);
+
+            color: #5f6f5c;
+
+        }
+
+        .day {
+
+            font-size: 70px;
+            font-weight: 700;
+
+        }
+
+
+        /* TABS */
+
+        .tabs {
+
+            display: flex;
+            margin: 15px;
+
+            background: #d8b59d;
+
+            border-radius: 18px;
+
+            padding: 4px;
+
+        }
+
+        .tab {
+
+            flex: 1;
+
+            padding: 12px;
+
+            text-align: center;
+
+            border-radius: 14px;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+        }
+
+        .tab.active {
+
+            background: var(--button-active);
+
+            color: white;
+
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .15);
+
+        }
+
+
+        /* BUTTON */
+
+        .btn {
+
+            background: var(--button);
+
+            padding: 15px;
+
+            margin: 10px 15px;
+
+            border-radius: 18px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: white;
+            color: ;
+            cursor: pointer;
+
+            font-size: 16px;
+
+            box-shadow:
+
+                inset 0 1px 0 rgba(255, 255, 255, .6),
+
+                0 5px 12px rgba(0, 0, 0, .1);
+
+            transition: .2s;
+
+        }
+
+        .btn:hover {
+
+            filter: brightness(1.05);
+
+        }
+
+        .btn:active {
+
+            transform: scale(.96);
+
+        }
+
+        .arrow {
+
+            transition: .3s;
+
+        }
+
+        .btn.open .arrow {
+
+            transform: rotate(90deg);
+
+        }
+
+
+        /* ACCORDION */
+
+        .content {
+
+            margin: 0 15px;
+
+            background: var(--glass);
+
+            border-radius: 18px;
+
+            backdrop-filter: blur(20px);
+
+            overflow: hidden;
+
+            max-height: 0;
+
+            transition: max-height .4s ease;
+
+            border: 1px solid rgba(255, 255, 255, .6);
+
+        }
+
+        .inner {
+
+            padding: 10px;
+
+        }
+
+        .student {
+
+            padding: 12px;
+
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+            cursor: pointer;
+
+            transition: .2s;
+
+        }
+
+        .student:hover {
+
+            background: rgba(255, 255, 255, .4);
+
+        }
+
+        .student:last-child {
+
+            border: none;
+
+        }
+
+
+        /* GLASS CARD */
+
+        .glass {
+
+            margin: 20px 15px;
+
+            padding: 15px;
+
+            background: var(--glass);
+
+            border-radius: 25px;
+
+            backdrop-filter: blur(25px);
+
+            border: 1px solid rgba(255, 255, 255, .7);
+
+            box-shadow:
+
+                0 10px 20px rgba(0, 0, 0, .1),
+
+                inset 0 1px 0 rgba(255, 255, 255, .9);
+
+        }
+
+        .glass-title {
+
+            text-align: center;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+
+        }
+
+        .logo {
+            font-size: 38px;
+            color: #1b8a89;
+            font-weight: 700;
+        }
+
+        .curve {
+
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+
+        }
+
+        .curve path {
+            fill: #e6d2bf;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="phone">
+
+
+        <div class="header">
+
+            <div class="logo">Frelino</div>
+
+
+        </div>
+
+
+
+        <div class="date-card">
+
+            <div>شنبه</div>
+
+            <div class="day">4</div>
+
+            <div>اسفند 1404</div>
+
+        </div>
+
+
+
+        <div class="tabs">
+
+            <div class="tab active">تندگویان</div>
+
+            <div class="tab">علم و صنعت</div>
+
+        </div>
+
+
+
+        <!-- computer 1 -->
+
+        <div class="btn accordion">
+
+            کامپیوتر 1
+
+            <span class="arrow">‹</span>
+
+        </div>
+
+        <div class="content">
+
+            <div class="inner">
+
+                <div class="student">علی رضایی</div>
+
+                <div class="student">محمد احمدی</div>
+
+                <div class="student">سارا حسینی</div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- computer 2 -->
+
+        <div class="btn accordion">
+
+            کامپیوتر 2
+
+            <span class="arrow">‹</span>
+
+        </div>
+
+        <div class="content">
+
+            <div class="inner">
+
+                <div class="student">نرگس کریمی</div>
+
+                <div class="student">امیر محمدی</div>
+
+                <div class="student">رضا اکبری</div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- glass list -->
+
+        <div class="glass">
+
+            <div class="glass-title">
+
+                ☕ لیست غایبین
+
+            </div>
+
+
+            <div class="btn">
+
+                تندگویان
+
+                <span>‹</span>
+
+            </div>
+
+
+            <div class="btn">
+
+                علم و صنعت
+
+                <span>‹</span>
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <script>
+
+
+        // accordion
+
+        const acc = document.querySelectorAll(".accordion");
+
+        acc.forEach(btn => {
+
+            btn.addEventListener("click", () => {
+
+                const content = btn.nextElementSibling;
+
+                const open = document.querySelector(".btn.open");
+
+                if (open && open !== btn) {
+
+                    open.classList.remove("open");
+
+                    open.nextElementSibling.style.maxHeight = null;
+                }
+
+                btn.classList.toggle("open");
+
+                if (content.style.maxHeight) {
+
+                    content.style.maxHeight = null;
+
+                } else {
+
+                    content.style.maxHeight = content.scrollHeight + "px";
+
+                }
+
+            });
+
+        });
+
+
+
+        // tabs
+
+        document.querySelectorAll(".tab").forEach(tab => {
+
+            tab.onclick = () => {
+
+                document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+
+                tab.classList.add("active");
+
+            };
+
+        });
+
+
+        // student click
+
+        document.querySelectorAll(".student").forEach(s => {
+
+            s.onclick = () => {
+
+                alert("انتخاب شد: " + s.innerText);
+
+            };
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>
